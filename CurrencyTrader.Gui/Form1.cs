@@ -14,7 +14,11 @@ using CurrencyTrader.AdoNet;
 using CurrencyTrader.Contracts;
 
 namespace CurrencyTrader.Gui
-{
+{/// <summary>
+/// @author Derek Shaheen
+/// @date 11/10/2019
+/// @description Assignment code used for downloading and parsing trades
+/// </summary>
     public partial class Form1 : Form
     {
         TradeProcessor tradeProcessor;
@@ -37,8 +41,8 @@ namespace CurrencyTrader.Gui
             var tradeValidator = new SimpleTradeValidator(logger);
             var tradeMapper = new SimpleTradeMapper();
             var tradeParser = new SimpleTradeParser(tradeValidator, tradeMapper);
-
-            ITradeStorage tradeStorage = new AsyncTradeStorage(logger);
+            
+            ITradeStorage tradeStorage = new AsyncTradeStorage(logger); // Updated this to use the AsyncTradeStorage instead of AdoNet
             tradeProcessor = new TradeProcessor(tradeDataProvider, tradeParser, tradeStorage);
         }
 
