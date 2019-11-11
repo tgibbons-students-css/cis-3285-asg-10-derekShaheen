@@ -18,13 +18,14 @@ namespace CurrencyTrader.AdoNet
         public AsyncTradeStorage(ILogger logger)
         {
             this.logger = logger;
-            tradeStorage = new AsyncTradeStorage(logger);
+            tradeStorage = new AdoNetTradeStorage(logger);
         }
 
-
+        // Method is designed to take in the trades and parse them asynchronously.
         public void Persist(IEnumerable<TradeRecord> trades)
         {
-            tradeStorage.Persist(trades); // Call the concrete object method
+            logger.LogInfo("Starting sync trade storage.");
+            Task.Run(() => tradeStorage.Persist(trades)); // Call the concrete object method asynchronously
         }
     }
 }
